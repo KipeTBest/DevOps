@@ -1,18 +1,22 @@
+# Проверка на ключ -d
 while getopts "d:" option; do
   case "${option}" in
     d) root_dir=${OPTARG};;
   esac
 done
 
+# Если путь не задан, то просим ввести его
 if [ -z "$root_dir" ]; then
   read -p "Enter path to root directory: " root_dir
 fi
 
+# Проверяем, что директория с таким именем не существует
 if [ ! -d "$root_dir" ]; then
   echo "Warning! Directory exists!"
   exit 1
 fi
 
+# Цклом проходимся по юзерам, создаем с их никами директории, устанавливаем права и записываем все данные в другой файл
 for user in $(cut -d: -f1 /etc/passwd); do
   user_dir="${root_dir}/${user}"
   mkdir -p "$user_dir" && chmod 755 "$user_dir" && chown "$user:$user" "$user_dir"
