@@ -1,0 +1,20 @@
+while getopts "d:" option; do
+  case "${option}" in
+    d) root_dir=${OPTARG};;
+  esac
+done
+
+if [ -z "$root_dir" ]; then
+  read -p "Enter path to root directory: " root_dir
+fi
+
+if [ ! -d "$root_dir" ]; then
+  echo "Warning! Directory exists!"
+  exit 1
+fi
+
+for user in $(cut -d: -f1 /etc/passwd); do
+  user_dir="${root_dir}/${user}"
+  mkdir -p "$user_dir" && chmod 755 "$user_dir" && chown "$user:$user" "$user_dir"
+  echo "Directory for $user has been created: $user_dir" | tee -a script_log.txt
+done
