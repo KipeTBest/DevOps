@@ -1,0 +1,38 @@
+version: '3'
+
+services:
+  web_server:
+    image: nginx:latest
+    ports:
+      - "30804:841"
+    networks:
+      my_network:
+        ipv4_address: 10.10.10.2
+    depends_on:
+      - db_server
+
+  db_server:
+    image: mysql:latest
+    volumes:
+      - db_data:/var/lib/mysql
+    ports:
+      - "54322:5432"
+    environment:
+      MYSQL_ROOT_PASSWORD: example
+    networks:
+      my_network:
+        ipv4_address: 10.10.10.3
+        aliases:
+          - new_db
+          - dev_db
+
+networks:
+  my_network:
+    ipam:
+      driver: default
+      config:
+        - subnet: 10.10.10.0/28
+
+volumes:
+  db_data:
+    driver: local
