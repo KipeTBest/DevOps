@@ -1,0 +1,23 @@
+FROM ubuntu:latest
+# это я
+MAINTAINER kirya
+# подкачиваю nginx и mysql
+RUN apt-get update && \
+    apt-get install -y nginx mysql-server
+# рабочая зона
+WORKDIR /homework
+# решил по приколу носты перенсти поближе к рабочему плейсу
+RUN cat /etc/hosts >> ~/homework
+# кодировка ютф
+ENV LANG C.UTF-8
+#переношу, что могу к nginx
+ADD . /etc/nginx/nginx/
+
+COPY . .
+
+VOLUME /var/lib/mysql
+
+EXPOSE 80
+
+CMD service nginx start && service mysql start && bash
+# ну я просто не знаю, что тут так подробно можно было описать...
