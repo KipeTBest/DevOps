@@ -1,0 +1,73 @@
+---
+- name: User setup
+  hosts: all
+  become: true
+  tasks:
+    - name: Create a new user
+      user:
+        name: myuser
+        comment: "My User"
+        shell: /bin/bash
+        state: present
+
+    - name: Create .ssh directory
+      file:
+        path: /home/myuser/.ssh
+        state: directory
+        owner: myuser
+        group: myuser
+        mode: '0700'
+
+    - name: Generate SSH key pair if not exists
+      command: ssh-keygen -f /home/myuser/.ssh/id_rsa -t rsa -N ''
+      args:
+        creates: /home/myuser/.ssh/id_rsa
+      become_user: myuser
+
+    - name: Create authorized_keys file if not exists
+      file:
+        path: /home/myuser/.ssh/authorized_keys
+        state: touch
+        owner: myuser
+        group: myuser
+        mode: '0600'
+
+    - name: Add SSH key to authorized_keys
+      shell: cat /home/myuser/.ssh/id_rsa.pub >> /home/myuser/.ssh/authorized_keys
+      become_user: myuser
+
+    - name: Ensure permissions on authorized_keys
+      file:
+        path: /home/myuser/.ssh/authorized_keys
+        owner: myuser
+        group: myuser
+        mode: '0600'
+
+    - name: Check if sshd_config exists
+      stat:
+        path: /etc/ssh/sshd_config
+      register: sshd_config
+
+    - name: Disable password authentication
+      lineinfile:
+        path: /etc/ssh/sshd_config
+        regexp: '^#?PasswordAuthentication'
+        line: 'PasswordAuthentication no'
+      when: sshd_config.stat.exists == true
+      notify:
+        - Restart SSH
+
+    - name: Create directory in /opt with permissions
+      file:
+        path: /opt/my_directory
+        state: directory
+        owner: myuser
+        group: myuser
+        mode: '0755'
+
+  handlers:
+    - name: Restart SSH
+      service:
+        name: ssh
+        state: restarted
+
