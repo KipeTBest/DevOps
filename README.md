@@ -38,7 +38,27 @@
 
 ### Использование
 
-У меня не получилось скачать этот ваш Ansible. Попробую сделать эту домашку после всех и проекта...
+Установка Ansible:
+
+sudo apt update
+
+sudo apt install ansible -y
+
+Создание файла setup_user.yml:
+
+nano setup_user.yml
+
+Вставляем playbook
+
+Запускаем playbook:
+
+ansible-playbook setup_user.yml
+
+Проверяем:
+ssh -i ~/.ssh/id_rsa myuser@localhost
+sudo cat /etc/ssh/sshd_config | grep PasswordAuthentication
+sudo cat /home/myuser/.ssh/authorized_keys
+ls -ld /opt/my_directory
 
 ## Задание 3
 
