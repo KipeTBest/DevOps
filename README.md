@@ -60,6 +60,18 @@ sudo cat /etc/ssh/sshd_config | grep PasswordAuthentication
 sudo cat /home/myuser/.ssh/authorized_keys
 ls -ld /opt/my_directory
 
+![photo_1_2024-06-14_14-55-53](https://github.com/KipeTBest/DevOps/assets/90268471/88a5c1ca-469a-4270-9347-33c5cf02ec21)
+![photo_2_2024-06-14_14-55-53](https://github.com/KipeTBest/DevOps/assets/90268471/f35f418d-f4a3-4e11-8c4f-ffd056a4f234)
+![photo_3_2024-06-14_14-55-53](https://github.com/KipeTBest/DevOps/assets/90268471/17a44e39-1432-444d-8eed-80e48fb10883)
+![photo_4_2024-06-14_14-55-53](https://github.com/KipeTBest/DevOps/assets/90268471/c71f682d-0bd8-4f7e-a67c-f064711ab561)
+![photo_5_2024-06-14_14-55-53](https://github.com/KipeTBest/DevOps/assets/90268471/febe934e-0e37-451d-b9f9-a4c7fa20eaad)
+![photo_6_2024-06-14_14-55-53](https://github.com/KipeTBest/DevOps/assets/90268471/8f884b82-e158-41c7-8b3b-14f676046637)
+![photo_7_2024-06-14_14-55-53](https://github.com/KipeTBest/DevOps/assets/90268471/45b2fc4b-d2de-48a2-8835-8a9c2664afc1)
+![photo_8_2024-06-14_14-55-53](https://github.com/KipeTBest/DevOps/assets/90268471/804de575-ff57-4bda-81d6-af9f40ed223d)
+![photo_9_2024-06-14_14-55-53](https://github.com/KipeTBest/DevOps/assets/90268471/03490fb3-bdf6-4905-8299-74731625248e)
+![photo_10_2024-06-14_14-55-53](https://github.com/KipeTBest/DevOps/assets/90268471/c9f5116b-8eb4-43e5-8665-28f25a90a7cf)
+
+
 ## Задание 3
 
 ### Описание
